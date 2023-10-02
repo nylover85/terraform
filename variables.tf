@@ -22,14 +22,14 @@ variable "jenkins_instance" {
 variable "bucketname" {
   description = "private jenkins bucket"
   type        = string
-  default     = "alysoncoppola_bucket2023"
+  default     = "alysoncoppola-bucket-2023"
 }
 
 #define the key pair
 variable "key_pair" {
   description = "key_pair"
   type        = string
-  default     = "terraform_keypair"
+  default     = "us-east-kp"
 }
 
 #define the VPC id
