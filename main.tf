@@ -1,16 +1,14 @@
 #create the ec2 instance
 resource "aws_instance" "jenkins_instance" {
   ami           = "ami-0cd06e47208c8afd3"
-  instance_type = "t2.micro"  
-  count         = 1
-  key_name      = var.key_pair
+  instance_type = "t2.micro"
   user_data     = file("jenkins.sh")
-
   tags = {
     name = "Jenkins instance"
   }
   vpc_security_group_ids = [aws_security_group.jenkins_sg.id]
 }
+
 #create a security group
 resource "aws_security_group" "jenkins_sg" {
   name   = "allow_tls and ssh"
@@ -45,7 +43,11 @@ resource "aws_security_group" "jenkins_sg" {
   }
 }
 
-variable "project_instance" {
-  description = "The instance type for your AWS EC2 instance"
-  # default     = "t2.micro"
+#create s3 bucket
+resource "aws_s3_bucket" "alysoncoppola-bucket-2023" {
+  bucket = var.bucketname
+  tags = {
+    Name = "alysoncoppola-bucket-2023"
+  }
 }
+
